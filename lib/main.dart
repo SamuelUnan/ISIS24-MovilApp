@@ -1,10 +1,25 @@
 import 'package:example_isis24_app/navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 import './screens/index.dart';
+import './services/index.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(AppState());
+}
+
+class AppState extends StatelessWidget {
+
+  @override
+  Widget build(BuildContext context) {
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: ( _ ) => AuthService() ),
+      ],
+      child: MyApp(),
+    );
+  }
 }
 
 class MyApp extends StatelessWidget {
@@ -19,7 +34,7 @@ class MyApp extends StatelessWidget {
         unselectedItemColor: Colors.black,
       )),
       title: 'Movil App',
-      initialRoute: '/home',
+      initialRoute: 'login',
       onGenerateRoute: AppNavigation.onGenerateRoute,
     );
   }

@@ -1,5 +1,5 @@
 import 'package:example_isis24_app/screens/index.dart';
-import 'package:example_isis24_app/services/local_db_services.dart';
+
 import 'package:example_isis24_app/widgets/index.dart';
 import 'package:flutter/material.dart';
 
@@ -13,22 +13,19 @@ class _HomeScreenState extends State<HomeScreens> {
   final List<Widget> _screens = [
     _HomeBody(
       content: PrincipalScreen(),
+      title: 'Catálogo de Productos',
+      subtitle: 'Listado de Productos',
     ),
-    _HomeBody(content: ProfileScreen()),
-    _HomeBody(content: ShoppingCartScreen()),
-    _HomeBody(content: WishlistScreen()),
-  ];
-
-  final List<Widget> _screen = [
-    PrincipalScreen(),
-    ProfileScreen(),
-    ShoppingCartScreen(),
-    WishlistScreen(),
+    _HomeBody(
+        content: ShoppingCartScreen2(),
+        title: 'Carrito de Compras',
+        subtitle: 'Productos en el Carrito'),
+    _HomeBody(content: ShoppingCartScreen(), title: '', subtitle: ''),
+    _HomeBody(content: WishlistScreen(), title: '', subtitle: ''),
   ];
 
   @override
   Widget build(BuildContext context) {
-    LocalDbServices.db.database;
     return Scaffold(
       body: Stack(
         children: [BackgroundHome(), _screens[_currentIndex]],
@@ -47,14 +44,20 @@ class _HomeScreenState extends State<HomeScreens> {
 
 class _HomeBody extends StatelessWidget {
   final Widget content;
+  final String title;
+  final String subtitle;
 
-  const _HomeBody({required this.content});
+  const _HomeBody(
+      {required this.content, required this.title, required this.subtitle});
   @override
   Widget build(BuildContext context) {
     return Container(
       child: Column(
         children: [
-          TitleHome(),
+          TitleHome(
+            Title: title,
+            Subtitle: subtitle,
+          ),
           Expanded(
               child: SingleChildScrollView(
             child: content,

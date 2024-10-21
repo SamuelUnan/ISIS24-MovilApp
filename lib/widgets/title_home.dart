@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 
 class TitleHome extends StatelessWidget {
+  final String Title;
+  final String Subtitle;
+
+  TitleHome({required this.Title, required this.Subtitle});
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -11,14 +16,14 @@ class TitleHome extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Catálogo de Productos',
+                this.Title,
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
               SizedBox(
                 height: 10,
               ),
               Text(
-                'Listado de Productos Disponibles',
+                this.Subtitle,
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
               )
             ],
